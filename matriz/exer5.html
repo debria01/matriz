@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz A e sua Inversa B</title>
+</head>
+<body>
+    <script>
+        // Função para criar uma matriz A 5x6 com números aleatórios
+        function criarMatrizA() {
+            const matrizA = [];
+            for (let i = 0; i < 5; i++) {
+                matrizA[i] = [];
+                for (let j = 0; j < 6; j++) {
+                    matrizA[i][j] = Math.floor(Math.random() * 10) + 1;
+                }
+            }
+            return matrizA;
+        }
+
+        // Função para criar a matriz B que é a inversa de A
+        function criarMatrizB(matrizA) {
+            const matrizB = [];
+            for (let i = 0; i < matrizA[0].length; i++) {
+                matrizB[i] = [];
+                for (let j = 0; j < matrizA.length; j++) {
+                    matrizB[i][j] = matrizA[j][i];
+                }
+            }
+            return matrizB;
+        }
+
+        // Criar a matriz A
+        const matrizA = criarMatrizA();
+
+        // Criar a matriz B (inversa de A)
+        const matrizB = criarMatrizB(matrizA);
+
+        // Exibir a matriz A
+        document.write("<h3>Matriz A:</h3>");
+        exibirMatriz(matrizA);
+
+        // Exibir a matriz B
+        document.write("<h3>Matriz B (Inversa de A):</h3>");
+        exibirMatriz(matrizB);
+
+        // Função para exibir uma matriz
+        function exibirMatriz(matriz) {
+            document.write("<pre>");
+            for (let i = 0; i < matriz.length; i++) {
+                document.write(matriz[i].join("\t") + "\n");
+            }
+            document.write("</pre>");
+        }
+    </script>
+</body>
+</html>

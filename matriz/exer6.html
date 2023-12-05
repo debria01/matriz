@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da Prova</title>
+</head>
+<body>
+    <script>
+        // Gabarito da prova
+        const gabarito = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D', 'A', 'B'];
+
+        // Função para calcular a nota de um aluno
+        function calcularNota(respostasAluno) {
+            let nota = 0;
+            for (let i = 0; i < gabarito.length; i++) {
+                if (respostasAluno[i] === gabarito[i]) {
+                    nota++;
+                }
+            }
+            return nota;
+        }
+
+        // Array para armazenar os dados dos alunos
+        const dadosAlunos = [];
+
+        // Loop para simular a leitura dos dados dos alunos
+        for (let i = 0; i < 2; i++) {
+            const matricula = prompt(`Digite o código de matrícula do aluno ${i + 1}:`);
+            const respostasAluno = [];
+            
+            // Loop para simular a leitura das respostas do aluno
+            for (let j = 0; j < gabarito.length; j++) {
+                const resposta = prompt(`Digite a resposta da questão ${j + 1} para o aluno ${matricula}:`);
+                respostasAluno.push(resposta.toUpperCase()); // Converte para maiúsculas para garantir a comparação correta
+            }
+
+            // Calcula a nota do aluno
+            const notaAluno = calcularNota(respostasAluno);
+
+            // Verifica se o aluno foi aprovado
+            const resultado = notaAluno >= 7.0 ? 'Aprovado' : 'Reprovado';
+
+            // Armazena os dados do aluno
+            dadosAlunos.push({ matricula, nota: notaAluno, resultado });
+        }
+
+        // Exibe os resultados na página
+        document.write("<h3>Resultados:</h3>");
+        document.write("<pre>");
+        for (const aluno of dadosAlunos) {
+            document.write(`Matrícula: ${aluno.matricula}, Nota: ${aluno.nota}, Resultado: ${aluno.resultado}\n`);
+        }
+        document.write("</pre>");
+
+        // Calcula a quantidade de alunos aprovados e a média da nota na turma
+        let alunosAprovados = 0;
+        let somaNotas = 0;
+
+        for (const aluno of dadosAlunos) {
+            somaNotas += aluno.nota;
+            if (aluno.nota >= 7.0) {
+                alunosAprovados++;
+            }
+        }
+
+        const mediaTurma = somaNotas / dadosAlunos.length;
+
+        // Exibe a quantidade de alunos aprovados e a média da nota na turma
+        document.write(`<h3>Estatísticas:</h3>`);
+        document.write(`Quantidade de Alunos Aprovados: ${alunosAprovados}<br>`);
+        document.write(`Média da Nota na Turma: ${mediaTurma.toFixed(2)}`);
+    </script>
+</body>
+</html>

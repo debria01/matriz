@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batalha Naval</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Batalha Naval</h1>
+    
+    <table id="tabuleiro">
+        <!-- O tabuleiro será preenchido dinamicamente com JavaScript -->
+    </table>
+
+    <script>
+        const tamanhoTabuleiro = 10;
+        const naviosJogador1 = 10;
+        const naviosJogador2 = 10;
+
+        let tabuleiroJogador1 = criarTabuleiro();
+        let tabuleiroJogador2 = criarTabuleiro();
+
+        posicionarNavios(tabuleiroJogador1, naviosJogador1);
+        posicionarNavios(tabuleiroJogador2, naviosJogador2);
+
+        function criarTabuleiro() {
+            const tabuleiro = [];
+            for (let i = 0; i < tamanhoTabuleiro; i++) {
+                const linha = [];
+                for (let j = 0; j < tamanhoTabuleiro; j++) {
+                    linha.push('O');
+                }
+                tabuleiro.push(linha);
+            }
+            return tabuleiro;
+        }
+
+        function posicionarNavios(tabuleiro, numNavios) {
+            for (let i = 0; i < numNavios; i++) {
+                let linha = Math.floor(Math.random() * tamanhoTabuleiro);
+                let coluna = Math.floor(Math.random() * tamanhoTabuleiro);
+                while (tabuleiro[linha][coluna] === 'X') {
+                    linha = Math.floor(Math.random() * tamanhoTabuleiro);
+                    coluna = Math.floor(Math.random() * tamanhoTabuleiro);
+                }
+                tabuleiro[linha][coluna] = 'X';
+            }
+        }
+
+        function atacar(linha, coluna, tabuleiro) {
+            if (tabuleiro[linha][coluna] === 'X') {
+                tabuleiro[linha][coluna] = 'O';
+                return 100; // Pontuação para navio derrubado
+            } else {
+                return 70; // Pontuação para navio não derrubado
+            }
+        }
+
+        function imprimirTabuleiro(id, tabuleiro) {
+            const table = document.getElementById(id);
+            table.innerHTML = '';
+            for (let i = 0; i < tamanhoTabuleiro; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < tamanhoTabuleiro; j++) {
+                    const cell = row.insertCell();
+                    cell.textContent = tabuleiro[i][j];
+                }
+            }
+        }
+
+        imprimirTabuleiro('tabuleiro', tabuleiroJogador1);
+
+        // Simulação de ataque
+        const pontuacaoJogador1 = atacar(0, 0, tabuleiroJogador2);
+        console.log('Pontuação Jogador 1:', pontuacaoJogador1);
+
+        // Atualizar tabuleiro após o ataque
+        imprimirTabuleiro('tabuleiro', tabuleiroJogador2);
+    </script>
+</body>
+</html>

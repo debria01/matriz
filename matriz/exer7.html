@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+const populacoes = [
+  [1000000, 900000, 800000, 700000, 600000],  // Estado 1
+  [1200000, 1100000, 1000000, 900000, 800000], // Estado 2
+  // ... continuar para os outros estados
+];
+
+// Iterar sobre os estados
+for (let i = 0; i < populacoes.length; i++) {
+  const estadoPop = populacoes[i];
+
+  // Encontrar a maior e menor população
+  const maiorPop = Math.max(...estadoPop);
+  const menorPop = Math.min(...estadoPop);
+  
+
+  // Calcular a média da população
+  const mediaPop = estadoPop.reduce((acc, pop) => acc + pop, 0) / estadoPop.length;
+  
+
+  // Imprimir os resultados
+  console.log(`Estado ${i + 1}:`);
+  console.log(`Maior população: ${maiorPop}`);
+  console.log(`Menor população: ${menorPop}`);
+  console.log(`Média da população: ${mediaPop}`);
+  console.log();
+  
+}
+
+    </script>
+    
+</body>
+</html>

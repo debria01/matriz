@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Distâncias entre Capitais</title>
+</head>
+<body>
+    <script>
+        // Objeto para armazenar informações sobre as capitais e suas distâncias
+        const mapaDistancias = {
+            'Brasília': { 'São Paulo': 1000, 'Rio de Janeiro': 800, 'Belo Horizonte': 600 },
+            'São Paulo': { 'Rio de Janeiro': 400, 'Belo Horizonte': 700 },
+            'Rio de Janeiro': { 'Belo Horizonte': 300 },
+            // Adicione mais capitais e distâncias conforme necessário
+        };
+
+        // Função para calcular a distância entre duas capitais
+        function calcularDistancia(capitalOrigem, capitalDestino) {
+            if (mapaDistancias[capitalOrigem] && mapaDistancias[capitalOrigem][capitalDestino]) {
+                return mapaDistancias[capitalOrigem][capitalDestino];
+            } else {
+                return "Distância não disponível.";
+            }
+        }
+
+        // Solicita ao usuário as capitais para calcular a distância
+        const capitalOrigem = prompt("Digite a capital de origem:");
+        const capitalDestino = prompt("Digite a capital de destino:");
+
+        // Calcula e exibe a distância
+        const distancia = calcularDistancia(capitalOrigem, capitalDestino);
+        alert(`A distância entre ${capitalOrigem} e ${capitalDestino} é: ${distancia} km`);
+    </script>
+</body>
+</html>

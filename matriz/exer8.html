@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Professores</title>
+</head>
+<body>
+    <h1>Registro de Professores</h1>
+
+    <div>
+        <label for="professorId">ID do Professor:</label>
+        <input type="number" id="professorId" min="1" max="50">
+    </div>
+
+    <div>
+        <label for="turno">Turno:</label>
+        <select id="turno">
+            <option value="0">Matutino</option>
+            <option value="1">Vespertino</option>
+            <option value="2">Noturno</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="disciplinas">Disciplinas (separadas por vírgula):</label>
+        <input type="text" id="disciplinas">
+    </div>
+
+    <button onclick="cadastrarProfessor()">Cadastrar Professor</button>
+
+    <hr>
+
+    <div>
+        <label for="consultaDisciplina">Disciplina para Consulta:</label>
+        <input type="text" id="consultaDisciplina">
+    </div>
+
+    <div>
+        <label for="consultaTurno">Turno para Consulta:</label>
+        <select id="consultaTurno">
+            <option value="0">Matutino</option>
+            <option value="1">Vespertino</option>
+            <option value="2">Noturno</option>
+        </select>
+    </div>
+
+    <button onclick="consultarProfessores()">Consultar Professores</button>
+
+    <script>
+        // Matriz para armazenar as informações dos professores
+        const professores = new Array(50).fill(null).map(() => Array(3).fill([]));
+
+        function cadastrarProfessor() {
+            const professorId = parseInt(document.getElementById('professorId').value) - 1;
+            const turno = parseInt(document.getElementById('turno').value);
+            const disciplinas = document.getElementById('disciplinas').value.split(',').map(disciplina => disciplina.trim());
+
+            if (professorId >= 0 && professorId < 50 && turno >= 0 && turno < 3) {
+                professores[professorId][turno] = disciplinas;
+                console.log(`Professor ${professorId + 1} cadastrado com sucesso.`);
+            } else {
+                console.log('ID do professor ou turno inválido.');
+            }
+        }
+
+        function consultarProfessores() {
+            const disciplina = document.getElementById('consultaDisciplina').value.trim();
+            const turno = parseInt(document.getElementById('consultaTurno').value);
+
+            if (turno >= 0 && turno < 3) {
+                const professoresDisponiveis = professores
+                    .map((disciplinas, professorId) => disciplinas[turno].includes(disciplina) ? professorId + 1 : null)
+                    .filter(professorId => professorId !== null);
+
+                if (professoresDisponiveis.length > 0) {
+                    console.log(`Professores disponíveis para ministrar ${disciplina} no turno ${turno + 1}: ${professoresDisponiveis.join(', ')}`);
+                } else {
+                    console.log(`Nenhum professor disponível para ministrar ${disciplina} no turno ${turno + 1}.`);
+                }
+            } else {
+                console.log('Turno inválido.');
+            }
+        }
+    </script>
+</body>
+</html>

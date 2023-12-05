@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Mês</title>
+</head>
+<body>
+    <script>
+        // Criação da matriz de informações sobre os meses
+        const meses = [
+            { numero: 1, nome: "Janeiro", abreviaturaPt: "Jan", abreviaturaEn: "January" },
+            { numero: 2, nome: "Fevereiro", abreviaturaPt: "Fev", abreviaturaEn: "February" },
+            { numero: 3, nome: "Março", abreviaturaPt: "Mar", abreviaturaEn: "March" },
+            { numero: 4, nome: "Abril", abreviaturaPt: "Abr", abreviaturaEn: "April" },
+            { numero: 5, nome: "Maio", abreviaturaPt: "Mai", abreviaturaEn: "May" },
+            { numero: 6, nome: "Junho", abreviaturaPt: "Jun", abreviaturaEn: "June" },
+            { numero: 7, nome: "Julho", abreviaturaPt: "Jul", abreviaturaEn: "July" },
+            { numero: 8, nome: "Agosto", abreviaturaPt: "Ago", abreviaturaEn: "August" },
+            { numero: 9, nome: "Setembro", abreviaturaPt: "Set", abreviaturaEn: "September" },
+            { numero: 10, nome: "Outubro", abreviaturaPt: "Out", abreviaturaEn: "October" },
+            { numero: 11, nome: "Novembro", abreviaturaPt: "Nov", abreviaturaEn: "November" },
+            { numero: 12, nome: "Dezembro", abreviaturaPt: "Dez", abreviaturaEn: "December" }
+        ];
+
+        // Solicita ao usuário um número de mês
+        const numeroMes = prompt("Digite um número de mês (1 a 12):");
+
+        // Encontrar o mês correspondente no array
+        const mesSelecionado = meses.find(mes => mes.numero === parseInt(numeroMes));
+
+        // Verifica se o mês foi encontrado e exibe as informações
+        if (mesSelecionado) {
+            document.write(`${mesSelecionado.numero} -> ${mesSelecionado.nome},${mesSelecionado.abreviaturaPt},${mesSelecionado.abreviaturaEn}`);
+        } else {
+            document.write("Número de mês inválido. Por favor, digite um número de mês entre 1 e 12.");
+        }
+    </script>
+</body>
+</html>

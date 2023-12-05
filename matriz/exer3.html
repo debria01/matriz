@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Dados</title>
+</head>
+<body>
+    <script>
+        // Função para ler os dados dos alunos
+        function lerDadosAlunos() {
+            const matrizAlunos = [];
+
+            for (let i = 0; i < 100; i++) {
+                const matricula = prompt(`Informe a matrícula do aluno ${i + 1}:`);
+                const mediaFinal = parseFloat(prompt(`Informe a média final do aluno ${i + 1}:`));
+                const frequencia = parseFloat(prompt(`Informe a porcentagem de frequência do aluno ${i + 1}:`));
+
+                // Verifica se os dados fornecidos são válidos
+                if (isNaN(mediaFinal) || isNaN(frequencia)) {
+                    alert("Por favor, forneça valores numéricos para média final e porcentagem de frequência.");
+                    return null;
+                }
+
+                // Adiciona os dados do aluno à matriz
+                matrizAlunos.push([matricula, mediaFinal, frequencia]);
+            }
+
+            // Calcula a média das médias finais e das porcentagens de frequência
+            let somaMediasFinais = 0;
+            let somaFrequencias = 0;
+
+            for (const aluno of matrizAlunos) {
+                somaMediasFinais += aluno[1];
+                somaFrequencias += aluno[2];
+            }
+
+            const mediaMediasFinais = somaMediasFinais / matrizAlunos.length;
+            const mediaFrequencias = somaFrequencias / matrizAlunos.length;
+
+            // Adiciona a última linha à matriz com as estatísticas
+            matrizAlunos.push(["Total de Alunos", "Média das Médias Finais", "Média das Frequências"]);
+            matrizAlunos.push([matrizAlunos.length - 1, mediaMediasFinais.toFixed(2), mediaFrequencias.toFixed(2)]);
+
+            return matrizAlunos;
+        }
+
+        // Chama a função para ler os dados e exibe o resultado
+        const dadosAlunos = lerDadosAlunos();
+        
+        if (dadosAlunos) {
+            // Exibe os dados formatados
+            document.write("<pre>");
+            for (const linha of dadosAlunos) {
+                document.write(linha.join("\t") + "\n");
+            }
+            document.write("</pre>");
+        }
+    </script>
+</body>
+</html>
